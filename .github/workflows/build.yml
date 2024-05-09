@@ -1,7 +1,5 @@
 name: Build/release
 
-uses: x6pnda/action-electron-compiler@v1.0.1
-
 on: push
 
 jobs:
