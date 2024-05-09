@@ -1,0 +1,40 @@
+#game-container {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  grid-gap: 10px;
+  justify-content: center;
+}
+
+.card {
+  width: 100px;
+  height: 160px;
+  background-color: lightblue;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.matched {
+  background-color: green;
+}
+
+.flip {
+  background-color: orange;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
