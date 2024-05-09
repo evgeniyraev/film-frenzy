@@ -3,29 +3,14 @@ name: Build/release
 on: push
 
 jobs:
-    release:
-        runs-on: ${{ matrix.os }}
-
-        strategy:
-            matrix:
-                os: [windows-latest]
-
-        steps:
-            - name: Check out Git repository
-              uses: actions/checkout@v1
-
-            - name: Install Node.js, NPM and Yarn
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 20
-
-            - name: Compile Electron App
-              uses: x6Pnda/action-electron-compiler@v1.0.1
-              with:
-                  # GitHub token, automatically provided to the action
-                  # (Optional)
-                  github_token: ${{ secrets.github_token }}
-
-                  # Package manager. NPM, PNPM and Yarn supported. Install Yarn and PNPM yourself. Default is NPM
-                  # (Optional)
-                  package_manager: NPM
+	build_on_win:
+	    runs-on: windows-latest
+	    steps:
+	    - uses: actions/checkout@v2
+	    - uses: actions/setup-node@master
+	      with:
+		node-version: 14
+	    - name: install dependencies
+	      run: npm install
+	    - name: build
+	      run: npm run make
