@@ -1,16 +1,105 @@
+html {
+  background-image: url("./media/screen_back.png");
+  color: white;
+}
+
+.logo {
+  width: 432px;
+  height: 178px;
+  background-image: url("./media/Logo.png");
+}
+
 #game-container {
   display: grid;
-  grid-template-columns: repeat(4, 100px);
-  grid-gap: 10px;
+  grid-template-columns: repeat(4, 181px);
+  grid-gap: 32px;
   justify-content: center;
 }
 
 .card {
-  width: 100px;
-  height: 160px;
-  background-color: lightblue;
-  border: 1px solid black;
+  width: 181px;
+  height: 266px;
   cursor: pointer;
+  background-size: contain;
+  position: relative;
+}
+.card::before {
+  z-index: 0;
+  position: absolute;
+  content: "";
+  width: calc(100% + 30px);
+  height: calc(100% + 30px);
+  background-image: url("./media/card_glow.png");
+  /* mix-blend-mode: soft-light; */
+  left: -14px;
+  top: -15px;
+}
+
+.card.flip[data-index="0"] div {
+  background-image: url("./media/fronts/card-0.png");
+}
+.card.flip[data-index="1"] div {
+  background-image: url("./media/fronts/card-1.png");
+}
+.card.flip[data-index="2"] div {
+  background-image: url("./media/fronts/card-2.png");
+}
+.card.flip[data-index="3"] div {
+  background-image: url("./media/fronts/card-3.png");
+}
+.card.flip[data-index="4"] div {
+  background-image: url("./media/fronts/card-4.png");
+}
+.card.flip[data-index="5"] div {
+  background-image: url("./media/fronts/card-5.png");
+}
+.card.flip[data-index="6"] div {
+  background-image: url("./media/fronts/card-6.png");
+}
+.card.flip[data-index="7"] div {
+  background-image: url("./media/fronts/card-7.png");
+}
+.card.flip[data-index="8"] div {
+  background-image: url("./media/fronts/card-8.png");
+}
+.card.flip[data-index="9"] div {
+  background-image: url("./media/fronts/card-9.png");
+}
+
+.card div {
+  z-index: 1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+}
+
+.card.western:not(.flip) div {
+  background-image: url("./media/backs/card_western.png");
+}
+.card.scifi:not(.flip) div {
+  background-image: url("./media/backs/card_scifi.png");
+}
+.card.romance:not(.flip) div {
+  background-image: url("./media/backs/card_romance.png");
+}
+.card.horror:not(.flip) div {
+  background-image: url("./media/backs/card_horror.png");
+}
+.card.history:not(.flip) div {
+  background-image: url("./media/backs/card_history.png");
+}
+.card.crime:not(.flip) div {
+  background-image: url("./media/backs/card_crime.png");
+}
+.card.comedy:not(.flip) div {
+  background-image: url("./media/backs/card_comedy.png");
+}
+.card.adventure:not(.flip) div {
+  background-image: url("./media/backs/card_adventure.png");
+}
+.card.card.adventure:not(.flip) div {
+  background-image: url("./media/backs/card_action.png");
 }
 
 .matched {
@@ -23,14 +112,15 @@
 
 header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
 }
 
 footer {
   display: flex;
-  justify-content: center;
-  padding: 20px;
+  justify-content: space-between;
+  padding: 14px 68px;
 }
 
 body {

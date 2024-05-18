@@ -36,5 +36,16 @@
   "license": "MIT",
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0"
+  },
+  "build": {
+    "extraResources": [
+      {
+        "from": "assets/",
+        "to": "media",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ]
   }
 }
