@@ -25,36 +25,119 @@
  *  });
  * ```
  */
+// const path = require('path');
+// const path = require('node:path')
 
 import './index.css';
 
+// const assetsPath = true ? path.join(__dirname, 'assets/fronts') : path.join(process.resourcesPath, 'assets/fronts');
+// const cardFrontImages = [
+//     path.join(assetsPath, "card-0.png"),
+//     path.join(assetsPath, "card-1.png"),
+//     path.join(assetsPath, "card-2.png"),
+//     path.join(assetsPath, "card-3.png"),
+//     path.join(assetsPath, "card-4.png"),
+//     path.join(assetsPath, "card-5.png"),
+//     path.join(assetsPath, "card-6.png"),
+//     path.join(assetsPath, "card-7.png"),
+//     path.join(assetsPath, "card-8.png"),
+//     path.join(assetsPath, "card-9.png"),
+// ];
+
+const fronts = [
+    "western",
+    "scifi",
+    "romance",
+    "horror",
+    "history",
+    "crime",
+    "comedy",
+    "adventure",
+]
+const timeLimit = 30*1000;
+
 let cards = document.querySelectorAll('.card');
-let flippedCard = false;
+let stopwatch = document.getElementById("stopwatch")
+let timeStart = null;
+let interval = null
+
+let flippedCards = []
+let matched = 0
+
+let lockOnMove = false;
 let lockBoard = false;
-let firstCard, secondCard;
+
 
 function flipCard() {
-    if (lockBoard) return;
-    if (this === firstCard) return;
+    if (lockOnMove && lockBoard) return;
+    if (this.classList.contains("flip")) return;
+
+    if(timeStart == null) {
+        timeStart = Date.now()
+        startTimer()
+    }
 
     this.classList.add('flip');
+    // let card = this.firstChild
+   //card.style.backgroundImage = `url(${cardFrontImages[this.dataset.index]})`;
 
-    if (!flippedCard) {
-        flippedCard = true;
-        firstCard = this;
+    flippedCards.push(this)
+
+    if(flippedCards.length & 1 == 1) {
         return;
     }
 
-    secondCard = this;
     checkForMatch();
 }
 
-function checkForMatch() {
-    let isMatch = firstCard.dataset.index === secondCard.dataset.index;
-    isMatch ? disableCards() : unflipCards();
+function startTimer() {
+    interval = setInterval(() => {
+        let now = Date.now()
+        let delta = timeLimit - (now - timeStart);
+        
+        if(delta > 0) {
+            deltaToFormat(delta)
+        } else {
+            endGame()
+        }
+
+    }, 1000)
 }
 
-function disableCards() {
+function deltaToFormat(delta) {
+    var minutes = Math.floor(delta / 60000);
+    var seconds = ((delta % 60000) / 1000).toFixed(0);
+    let tr = minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+    stopwatch.innerHTML = tr
+}
+
+function checkForMatch() {
+    let firstCard = flippedCards.shift()
+    let secondCard = flippedCards.shift()
+    console.log("checking", firstCard.dataset.index, secondCard.dataset.index)
+
+    let isMatch = firstCard.dataset.index === secondCard.dataset.index;
+
+    if (isMatch) {
+        disableCards(firstCard, secondCard) 
+    } else {
+        unflipCards(firstCard, secondCard);
+    }
+}
+
+function endGame() {
+    clearInterval(interval);
+    interval = null
+
+    setTimeout(() => {
+        shuffle()
+    }, 1000); 
+
+}
+
+function disableCards(firstCard, secondCard) {
+    matched += 2;
+
     firstCard.removeEventListener('click', flipCard);
     secondCard.removeEventListener('click', flipCard);
 
@@ -64,7 +147,7 @@ function disableCards() {
     resetBoard();
 }
 
-function unflipCards() {
+function unflipCards(firstCard, secondCard) {
     lockBoard = true;
 
     setTimeout(() => {
@@ -76,15 +159,37 @@ function unflipCards() {
 }
 
 function resetBoard() {
-    [flippedCard, lockBoard] = [false, false];
-    [firstCard, secondCard] = [null, null];
+    lockBoard = false
+    
+    if(matched == cards.length) {
+        endGame()
+    }
 }
 
-(function shuffle() {
-    cards.forEach(card => {
-        let randomPos = Math.floor(Math.random() * 10);
-        card.style.order = randomPos;
-    });
-})();
+function shuffle() {
+    matched = 0
+    deltaToFormat(timeLimit)
+    flippedCards = []
 
-cards.forEach(card => card.addEventListener('click', flipCard));
+    let arr = [...Array(cards.length)].map((_, el) => {
+        return el >> 1 
+    }).reduce((arg, val, i) => {
+        let r = (Math.random() * i) >> 0
+        arg.splice(r, 0, val)
+        return arg
+    }, [])
+
+    cards.forEach((card, i) => {
+
+        let frontName = fronts[(Math.random() * fronts.length) >> 0]
+        card.style.order = arr[i]
+
+        card.classList.remove('flip');
+        card.classList.remove('matched');
+
+        card.classList.add(frontName)
+        card.addEventListener('click', flipCard)
+    });
+};
+
+shuffle()
