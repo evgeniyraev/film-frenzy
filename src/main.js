@@ -1,51 +1,89 @@
-const { app, BrowserWindow } = require('electron');
-const path = require('node:path');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const fs = require('fs');
+const path = require('path');
+const url = require('url')
+const storage = require('electron-json-storage');
+const os = require('os');
 
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require('electron-squirrel-startup')) {
-  app.quit();
+let mainWindow;
+let settingsWindow;
+
+function createMainWindow() {
+    mainWindow = new BrowserWindow({
+        width: 800,
+        height: 600,
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false,
+        },
+        autoHideMenuBar: true
+    });
+
+    mainWindow.loadURL(url.format({
+        pathname: path.join(__dirname, "game", 'index.html'),
+        protocol: 'file:',
+        slashes: true
+        
+    }))
+
+    mainWindow.webContents.on('did-finish-load', () => {
+        //loadConfing()
+    });
+
+    // mainWindow.webContents.openDevTools()
 }
 
-const createWindow = () => {
-  // Create the browser window.
-  const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
-    },
-  });
+function createSettingsWindow() {
+    settingsWindow = new BrowserWindow({
+        width: 400,
+        height: 300,
+        parent: mainWindow,
+        modal: false,
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false
+        }
+    });
 
-  // and load the index.html of the app.
-  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+    settingsWindow.loadURL(url.format({
+        pathname: path.join(__dirname, "settings", 'settings.html'),
+        protocol: 'file:',
+        slashes: true
+    }))
 
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools();
-};
+    settingsWindow.on('closed', function () {
+        // Dereference the window object, usually you would store windows
+        // in an array if your app supports multi windows, this is the time
+        // when you should delete the corresponding element.
+        settingsWindow = null
+    })
+    
+    // settingsWindow.webContents.openDevTools()
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
+}
+
 app.whenReady().then(() => {
-  createWindow();
+    setupStorage()
+    createMainWindow()
+})
 
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
+function setupStorage() {
+    storage.setDataPath(os.tmpdir());
+}
+
+ipcMain.on('open-settings', () => {
+    if (!settingsWindow) {
+        createSettingsWindow();
     }
-  });
 });
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
-});
+ipcMain.on('save-media', (event, media) => {
+    storage.set('config', media, function (error) {
+        if (error) throw error;
+    });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
+    //fs.writeFileSync('media.json', JSON.stringify(media));
+    mainWindow.webContents.send('update-media', media);
+    settingsWindow.close();
+    settingsWindow = null;
+});

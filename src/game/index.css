@@ -35,38 +35,15 @@ html {
   top: -15px;
 }
 
-.card.flip[data-index="0"] div {
-  background-image: url("./media/fronts/card-0.png");
-}
-.card.flip[data-index="1"] div {
-  background-image: url("./media/fronts/card-1.png");
-}
-.card.flip[data-index="2"] div {
-  background-image: url("./media/fronts/card-2.png");
-}
-.card.flip[data-index="3"] div {
-  background-image: url("./media/fronts/card-3.png");
-}
-.card.flip[data-index="4"] div {
-  background-image: url("./media/fronts/card-4.png");
-}
-.card.flip[data-index="5"] div {
-  background-image: url("./media/fronts/card-5.png");
-}
-.card.flip[data-index="6"] div {
-  background-image: url("./media/fronts/card-6.png");
-}
-.card.flip[data-index="7"] div {
-  background-image: url("./media/fronts/card-7.png");
-}
-.card.flip[data-index="8"] div {
-  background-image: url("./media/fronts/card-8.png");
-}
-.card.flip[data-index="9"] div {
-  background-image: url("./media/fronts/card-9.png");
+.card img { 
+  display: none;
 }
 
-.card div {
+.card.flip img {
+  display: block;
+}
+
+.card img, .card div {
   z-index: 1;
   position: absolute;
   width: 100%;

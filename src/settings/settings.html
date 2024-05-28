@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="/styles.css">
+  <link rel="stylesheet" type="text/css" href="./settings.css">
+  <title>Settings</title>
+</head>
+<body>
+
+  <label>seconds:</label>
+  <input type="number" id="seconds"/>
+  <div id="image-display"></div>
+  <label for="select-image">add poster</label>
+  <input type="file" id="select-image" multiple accept="image/*">
+  <button id="remove-all-images">remove all images</button>
+
+  <div id="video-display"></div>
+  <label for="select-video">add video</label>
+  <input type="file" id="select-video" accept="video/*">
+
+  <button id="save">Save</button>
+  <script src="settings.js"></script>
+</body>
+</html>
