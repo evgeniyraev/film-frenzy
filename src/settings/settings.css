@@ -1,0 +1,36 @@
+html {
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+button {
+    margin: 20px;
+    padding: 5px
+}
+
+.item {
+    display: flex;
+    flex-direction: row;
+}
+.item:nth-child(2n) {
+    background-color: aqua;
+}
+
+.item img {
+    height: 50px;
+    margin: 5px;
+}
+
+.item video {
+    height: 250px;
+}
+
+.item button {
+    background-color: red;
+    color: white;
+    border: none;
+}

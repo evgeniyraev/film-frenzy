@@ -1,9 +1,9 @@
 {
-  "name": "film-frenzy",
-  "productName": "film-frenzy",
+  "name": "my-app",
+  "productName": "my-app",
   "version": "1.0.0",
-  "description": "Film Franzy game, card matching game",
-  "main": ".webpack/main",
+  "description": "My Electron application description",
+  "main": "src/main.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
@@ -19,14 +19,8 @@
     "@electron-forge/maker-zip": "^7.4.0",
     "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
     "@electron-forge/plugin-fuses": "^7.4.0",
-    "@electron-forge/plugin-webpack": "^7.4.0",
     "@electron/fuses": "^1.8.0",
-    "@electron/packager": "^18.3.2",
-    "@vercel/webpack-asset-relocator-loader": "^1.7.3",
-    "css-loader": "^6.11.0",
-    "electron": "30.0.3",
-    "node-loader": "^2.0.0",
-    "style-loader": "^3.3.4"
+    "electron": "30.0.8"
   },
   "keywords": [],
   "author": {
@@ -35,17 +29,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
-  },
-  "build": {
-    "extraResources": [
-      {
-        "from": "assets/",
-        "to": "media",
-        "filter": [
-          "**/*"
-        ]
-      }
-    ]
+    "electron-json-storage": "^4.6.0",
+    "electron-squirrel-startup": "^1.0.1"
   }
 }

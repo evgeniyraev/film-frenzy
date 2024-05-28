@@ -1,48 +1,8 @@
-/**
- * This file will automatically be loaded by webpack and run in the "renderer" context.
- * To learn more about the differences between the "main" and the "renderer" context in
- * Electron, visit:
- *
- * https://electronjs.org/docs/tutorial/application-architecture#main-and-renderer-processes
- *
- * By default, Node.js integration in this file is disabled. When enabling Node.js integration
- * in a renderer process, please be aware of potential security implications. You can read
- * more about security risks here:
- *
- * https://electronjs.org/docs/tutorial/security
- *
- * To enable Node.js integration in this file, open up `main.js` and enable the `nodeIntegration`
- * flag:
- *
- * ```
- *  // Create the browser window.
- *  mainWindow = new BrowserWindow({
- *    width: 800,
- *    height: 600,
- *    webPreferences: {
- *      nodeIntegration: true
- *    }
- *  });
- * ```
- */
-// const path = require('path');
-// const path = require('node:path')
 
-import './index.css';
-
-// const assetsPath = true ? path.join(__dirname, 'assets/fronts') : path.join(process.resourcesPath, 'assets/fronts');
-// const cardFrontImages = [
-//     path.join(assetsPath, "card-0.png"),
-//     path.join(assetsPath, "card-1.png"),
-//     path.join(assetsPath, "card-2.png"),
-//     path.join(assetsPath, "card-3.png"),
-//     path.join(assetsPath, "card-4.png"),
-//     path.join(assetsPath, "card-5.png"),
-//     path.join(assetsPath, "card-6.png"),
-//     path.join(assetsPath, "card-7.png"),
-//     path.join(assetsPath, "card-8.png"),
-//     path.join(assetsPath, "card-9.png"),
-// ];
+const { time } = require('console');
+const { ipcRenderer } = require('electron');
+const storage = require('electron-json-storage');
+const os = require('os');
 
 const fronts = [
     "western",
@@ -54,9 +14,11 @@ const fronts = [
     "comedy",
     "adventure",
 ]
-const timeLimit = 30*1000;
+let backs = [];
 
-let cards = document.querySelectorAll('.card');
+let timeLimit = 30*1000;
+
+let cards = []
 let stopwatch = document.getElementById("stopwatch")
 let timeStart = null;
 let interval = null
@@ -66,6 +28,59 @@ let matched = 0
 
 let lockOnMove = false;
 let lockBoard = false;
+
+function loadConfig() {
+    storage.setDataPath(os.tmpdir());
+    let config = storage.getSync('config');
+
+    update(config)
+}
+
+function update(config) {
+    timeLimit = config.seconds * 1000
+    backs = config.images || []
+    cards.length = 0;
+
+    const gameContainer = document.getElementById('game-container');
+    gameContainer.innerHTML = '';
+
+    let images = config.images;
+    images.forEach((element, i) => {
+        [null, null].forEach(_ => {
+            let card = addCard(i, element)
+            gameContainer.appendChild(card);
+            cards.push(card)
+        })
+    })
+
+    //cards = document.querySelectorAll('.card');
+
+    shuffle()
+}
+
+function addCard(index, src) {
+    const div = document.createElement("div")
+    div.classList.add('card');
+    div.dataset.index = index
+    
+    const front = document.createElement("div")
+
+    const img = document.createElement("img")
+    img.src = src
+
+    div.appendChild(img)
+    div.appendChild(front)
+    return div
+
+}
+
+ipcRenderer.on('update-media', (event, config) => {
+    update(config);
+  });
+
+document.getElementById('open-settings').addEventListener('click', () => {
+    ipcRenderer.send('open-settings');
+});
 
 
 function flipCard() {
@@ -129,6 +144,7 @@ function endGame() {
     clearInterval(interval);
     interval = null
 
+    window.location.replace('./end.html');
     setTimeout(() => {
         shuffle()
     }, 1000); 
@@ -192,4 +208,4 @@ function shuffle() {
     });
 };
 
-shuffle()
+loadConfig()
