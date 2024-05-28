@@ -36,6 +36,10 @@ function loadConfig() {
     update(config)
 }
 
+document.getElementById('refresh-game').addEventListener("click", (event) => {
+    clear()
+});
+
 function update(config) {
     timeLimit = config.seconds * 1000
     backs = config.images || []
@@ -54,6 +58,16 @@ function update(config) {
     })
 
     //cards = document.querySelectorAll('.card');
+
+    clear()
+}
+
+function clear() {
+    if(interval) {
+        clearInterval(interval);
+        interval = null;
+        timeStart = null;
+    }
 
     shuffle()
 }
@@ -141,13 +155,10 @@ function checkForMatch() {
 }
 
 function endGame() {
-    clearInterval(interval);
-    interval = null
+    clear()
 
-    window.location.replace('./end.html');
-    setTimeout(() => {
-        shuffle()
-    }, 1000); 
+    window.location.replace(`../end/end.html?left=${(cards.length - matched)>>1}`);
+d
 
 }
 
@@ -184,6 +195,7 @@ function resetBoard() {
 
 function shuffle() {
     matched = 0
+
     deltaToFormat(timeLimit)
     flippedCards = []
 

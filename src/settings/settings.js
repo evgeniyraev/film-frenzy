@@ -22,6 +22,10 @@ selectImage.addEventListener('change', function(e) {
     displayMedia()
   }
 });
+document.getElementById('remove-all-images').addEventListener("click", () => {
+  images = []
+  displayMedia()
+})
 
 selectVideo.addEventListener('change', function(e) {
   if (e.target.files[0]) {
@@ -34,10 +38,9 @@ selectVideo.addEventListener('change', function(e) {
     displayMedia()
   }
 });
-document.getElementById('remove-all-images').addEventListener("click", () => {
-  images = []
-  displayMedia()
-})
+selectSeconds.addEventListener('change', function (e) {
+  seconds = e.target.value || 30
+});
 
 let images = [];
 let video = null;
@@ -60,6 +63,7 @@ function loadMedia() {
 
   images = media.images || [];
   video = media.video
+  seconds = media.seconds
   displayMedia(media);
 }
 
@@ -111,7 +115,7 @@ function displayMedia() {
     videoDisplay.appendChild(div);
   }
   
-  selectSeconds = seconds
+  selectSeconds.value = seconds
 }
 
 loadMedia();

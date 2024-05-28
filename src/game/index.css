@@ -1,5 +1,4 @@
 html {
-  background-image: url("./media/screen_back.png");
   color: white;
 }
 
@@ -97,7 +96,16 @@ header {
 footer {
   display: flex;
   justify-content: space-between;
-  padding: 14px 68px;
+  padding: 34px 68px;
+}
+
+#refresh-game {
+  width: 75px;
+  height: 75px;
+  background-image: url("../media/restart_icon.png");
+  background-size: contain;
+  background-color: unset;
+  border: unset;
 }
 
 body {

@@ -1,0 +1,36 @@
+html {
+  background-image: url(./media/screen_home.png);
+}
+
+body {
+  display: grid;
+    align-items: center;
+    width: 1080px;
+    height: 1920px;
+    justify-items: center;
+}
+
+a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 48px;
+}
+
+a.start {
+  width: 242px;
+  height: 78px;
+  background-color: #04CFFF;
+  text-decoration: none;
+  box-shadow: 0px 0px 12px #01cfff;
+  border: 4px solid white;
+  border-radius: 20px;
+  margin-top: 640px;
+}
+
+a.video {
+  align-self: flex-end;
+    margin-bottom: 120px;
+}
