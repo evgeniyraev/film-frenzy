@@ -20,7 +20,7 @@ function createMainWindow() {
     });
 
     mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, "game", 'index.html'),
+        pathname: path.join(__dirname, "landing", 'landing.html'),
         protocol: 'file:',
         slashes: true
         
