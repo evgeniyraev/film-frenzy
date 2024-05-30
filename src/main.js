@@ -30,6 +30,8 @@ function createMainWindow() {
         //loadConfing()
     });
 
+    mainWindow.setKiosk(true)
+
     // mainWindow.webContents.openDevTools()
 }
 
