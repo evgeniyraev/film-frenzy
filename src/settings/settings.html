@@ -7,16 +7,24 @@
 </head>
 <body>
 
-  <label>seconds:</label>
-  <input type="number" id="seconds"/>
-  <div id="image-display"></div>
-  <label for="select-image">add poster</label>
-  <input type="file" id="select-image" multiple accept="image/*">
-  <button id="remove-all-images">remove all images</button>
+  <fieldset>
+    <legend>Seconds</legend>
+    <input type="number" id="seconds" />
+  </fieldset>
+  <fieldset>
+    <legend for="select-image">Posters</legend>
+    <div id="image-display"></div>
+    <input type="file" id="select-image" multiple accept="image/*">
+    <label for="select-image">add posters</label>
+    <button id="remove-all-images">remove all images</button>
+  </fieldset>
 
-  <div id="video-display"></div>
-  <label for="select-video">add video</label>
-  <input type="file" id="select-video" accept="video/*">
+  <fieldset>
+    <legend>Video</legend>
+    <div id="video-display"></div>
+    <label for="select-video">add video</label>
+    <input type="file" id="select-video" accept="video/*">
+  </fieldset>
 
   <button id="save">Save</button>
   <script src="settings.js"></script>
