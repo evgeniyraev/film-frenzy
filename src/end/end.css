@@ -22,11 +22,18 @@ body {
   pointer-events: none;
 }
 
+video {
+  position: absolute;
+  z-index: -1;
+}
+
 footer {
+  z-index: 1;
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
+
 
 footer a {
   padding: 72px;

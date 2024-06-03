@@ -67,6 +67,7 @@ function createSettingsWindow() {
 app.whenReady().then(() => {
     setupStorage()
     createMainWindow()
+    //createSettingsWindow()
 })
 
 function setupStorage() {
