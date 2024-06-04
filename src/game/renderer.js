@@ -1,6 +1,6 @@
 
 const { time } = require('console');
-const { ipcRenderer } = require('electron');
+// const { ipcRenderer } = require('electron');
 const storage = require('electron-json-storage');
 const os = require('os');
 
@@ -91,11 +91,6 @@ function addCard(index, src) {
 ipcRenderer.on('update-media', (event, config) => {
     update(config);
   });
-
-document.getElementById('open-settings').addEventListener('click', () => {
-    ipcRenderer.send('open-settings');
-});
-
 
 function flipCard() {
     if (lockOnMove && lockBoard) return;

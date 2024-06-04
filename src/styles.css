@@ -1,4 +1,33 @@
+@font-face { font-family: Avenir; src: url('./media/Avenir/Avenir\ Next\ Cyr\ Bold/AvenirNextCyr-Bold.otf'); }
+
 html {
   background-image: url("./media/screen_back.png");
   color: white;
+
+  font-family: Avenir;
+}
+
+body {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+.system {
+  position: absolute;
+  top:0;
+  width: 200px;
+  height: 200px;
+  background-color: transparent;
+  border: none;
+  z-index: 2;
+}
+
+#open-settings {
+  left: 0;
+}
+
+#kios-mode {
+  right: 0;
 }
