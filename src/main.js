@@ -90,3 +90,11 @@ ipcMain.on('save-media', (event, media) => {
     settingsWindow.close();
     settingsWindow = null;
 });
+
+ipcMain.on('toggle-kiosk', (event, media) => {
+    if (mainWindow.isKiosk()) {
+        mainWindow.setKiosk(false)
+    } else {
+        mainWindow.setKiosk(true)
+    }
+});
