@@ -150,9 +150,10 @@ function checkForMatch() {
 }
 
 function endGame() {
+    let left = (cards.length - matched) >> 1
     clear()
 
-    window.location.replace(`../end/end.html?left=${(cards.length - matched)>>1}`);
+    window.location.replace(`../end/end.html?left=${left}`);
 d
 
 }

@@ -5,6 +5,8 @@ html {
   color: white;
 
   font-family: Avenir;
+
+  user-select: none;
 }
 
 body {

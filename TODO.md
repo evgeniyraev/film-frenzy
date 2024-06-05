@@ -1,4 +1,4 @@
-- remove scrolls
++ remove scrolls
 - remove menu in settings screen
 - remove select
 - options on empty state
