@@ -102,8 +102,6 @@ function flipCard() {
     }
 
     this.classList.add('flip');
-    // let card = this.firstChild
-   //card.style.backgroundImage = `url(${cardFrontImages[this.dataset.index]})`;
 
     flippedCards.push(this)
 
@@ -150,12 +148,12 @@ function checkForMatch() {
 }
 
 function endGame() {
-    let left = (cards.length - matched) >> 1
+    let foundSymbols = (matched) >> 1
     clear()
 
-    window.location.replace(`../end/end.html?left=${left}`);
-d
-
+    if(foundSymbols > 1) {
+        window.location.replace(`../end/end.html?left=${foundSymbols}`);
+    }
 }
 
 function disableCards(firstCard, secondCard) {
