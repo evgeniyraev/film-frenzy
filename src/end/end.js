@@ -36,9 +36,11 @@ function update(config) {
     let video = config.video
 
     if(video == null) {
-        videoButton.style.display = "none"
+        videoButton.setAttribute('href', '../landing/landing.html');
+        //videoButton.style.display = "none"
     } else {
-        videoButton.style.display = "block"
+        videoButton.setAttribute('href', '../video/video.html');
+        // videoButton.style.display = "block"
     }
 }
 
