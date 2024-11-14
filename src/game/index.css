@@ -1,6 +1,8 @@
 html {
+  background-image: url(./media/screen_back.png);
   color: white;
 }
+
 
 .logo {
   width: 432px;
