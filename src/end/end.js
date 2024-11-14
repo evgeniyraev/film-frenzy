@@ -13,5 +13,4 @@ let endName = map[index] || "lose"
 console.log(left, total, endName)
 
 let result = document.getElementById("result")
-
-result.innerText = endName
+result.classList.add(endName)

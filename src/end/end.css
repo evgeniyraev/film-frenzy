@@ -21,6 +21,14 @@ body {
   flex: 1;
   align-content: center;
   font-size: 67px;
+  width: 100%;
+}
+
+#result.win {
+  background-image: url(./media/screen_win.png);
+}
+#result.lose {
+  background-image: url(./media/screen_fail.png);
 }
 
 footer {
