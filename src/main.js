@@ -10,8 +10,8 @@ let settingsWindow;
 
 function createMainWindow() {
     mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 1080,
+        height: 1920,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
@@ -37,8 +37,8 @@ function createMainWindow() {
 
 function createSettingsWindow() {
     settingsWindow = new BrowserWindow({
-        width: 400,
-        height: 300,
+        width: 800,
+        height: 600,
         parent: mainWindow,
         modal: false,
         webPreferences: {
