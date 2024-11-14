@@ -20,13 +20,14 @@ a {
 }
 
 a.start {
-  width: 242px;
-  height: 78px;
-  background-color: #04CFFF;
+  font-size: 96px;
+  width: 485px;
+  height: 156px;
+  background-color: #26D0C3;
   text-decoration: none;
-  box-shadow: 0px 0px 12px #01cfff;
+  box-shadow: 0px 0px 12px #01CFFF;
   border: 4px solid white;
-  border-radius: 20px;
+  border-radius: 27px;
   margin-top: 640px;
 }
 

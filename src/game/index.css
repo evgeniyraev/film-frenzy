@@ -9,7 +9,9 @@ html {
 }
 
 #stopwatch {
+  margin-top: 180px;
   font-size: 62px;
+  font-family: "Helvetica Neue";
 }
 
 #game-container {
@@ -54,32 +56,8 @@ html {
   background-size: contain;
 }
 
-.card.western:not(.flip) div {
-  background-image: url("./media/backs/card_western.png");
-}
-.card.scifi:not(.flip) div {
-  background-image: url("./media/backs/card_scifi.png");
-}
-.card.romance:not(.flip) div {
-  background-image: url("./media/backs/card_romance.png");
-}
-.card.horror:not(.flip) div {
-  background-image: url("./media/backs/card_horror.png");
-}
-.card.history:not(.flip) div {
-  background-image: url("./media/backs/card_history.png");
-}
-.card.crime:not(.flip) div {
-  background-image: url("./media/backs/card_crime.png");
-}
-.card.comedy:not(.flip) div {
-  background-image: url("./media/backs/card_comedy.png");
-}
-.card.adventure:not(.flip) div {
-  background-image: url("./media/backs/card_adventure.png");
-}
-.card.card.adventure:not(.flip) div {
-  background-image: url("./media/backs/card_action.png");
+.card.back:not(.flip) div {
+  background-image: url("./media/backs/card_back.png");
 }
 
 .matched {

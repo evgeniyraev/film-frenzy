@@ -5,14 +5,7 @@ const storage = require('electron-json-storage');
 const os = require('os');
 
 const fronts = [
-    "western",
-    "scifi",
-    "romance",
-    "horror",
-    "history",
-    "crime",
-    "comedy",
-    "adventure",
+    "back",
 ]
 let backs = [];
 
@@ -149,10 +142,13 @@ function checkForMatch() {
 
 function endGame() {
     let foundSymbols = (matched) >> 1
+    let total = cards.length >> 1
     clear()
 
+    console.log(`found: ${foundSymbols}`)
+
     if(foundSymbols > 1) {
-        window.location.replace(`../end/end.html?left=${foundSymbols}`);
+        window.location.replace(`../end/end.html?found=${foundSymbols}&total=${total}`);
     }
 }
 

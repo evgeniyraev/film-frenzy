@@ -1,21 +1,17 @@
 const searchParams = new URLSearchParams(document.location.search);
 
-let result = document.getElementById("result")
-
 let map = [
-    "star",
-    "boss",
-    "genius",
-    "master",
-    "lord"
+    "win",
 ]
 
-let left = searchParams.get("left") >> 0
-let index = (left >> 1) - 1
-let endName = map[index] || "star"
+let total = searchParams.get("total") >> 0
+let found = searchParams.get("found") >> 0
+let left = total - found
+let index = left
+let endName = map[index] || "lose"
 
-console.log(left, index, endName)
+console.log(left, total, endName)
 
-let videoElement = document.getElementById("video-background")
+let result = document.getElementById("result")
 
-videoElement.src = `./media/videos/${endName}.mp4`
+result.innerText = endName
