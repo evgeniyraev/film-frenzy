@@ -37,10 +37,8 @@ function update(config) {
 
     if(video == null) {
         videoButton.setAttribute('href', '../landing/landing.html');
-        //videoButton.style.display = "none"
     } else {
         videoButton.setAttribute('href', '../video/video.html');
-        // videoButton.style.display = "block"
     }
 }
 
