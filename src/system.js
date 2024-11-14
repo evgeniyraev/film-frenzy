@@ -14,7 +14,6 @@ function onSettingsStart() {
         settingsTimer = setTimeout(() => {
             openSettings()
             settingsTimer = null
-
         }, 5000)
     }
 }

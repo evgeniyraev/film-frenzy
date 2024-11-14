@@ -85,7 +85,6 @@ ipcMain.on('save-media', (event, media) => {
         if (error) throw error;
     });
 
-    //fs.writeFileSync('media.json', JSON.stringify(media));
     mainWindow.webContents.send('update-media', media);
     settingsWindow.close();
     settingsWindow = null;
