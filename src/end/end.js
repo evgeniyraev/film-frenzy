@@ -35,8 +35,6 @@ function loadConfig() {
 function update(config) {
     let video = config.video
 
-    console.log("test")
-
     if(video == null) {
         videoButton.style.display = "none"
     } else {

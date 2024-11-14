@@ -18,7 +18,7 @@ function loadConfig() {
 function update(config) {
     let video = config.video
 
-    if(video == null && false) {
+    if(video == null) {
         videoButton.style.display = "none"
     } else {
         videoButton.style.display = "block"
